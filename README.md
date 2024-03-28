@@ -19,3 +19,10 @@ The game will display the hidden word with underscores representing each letter.
 Guess letters or the entire word to reveal the hidden word.
 Be careful! You have a limited number of tries based on the difficulty level.
 The game will keep track of your guesses and update the hangman image as you progress.
+
+**Limitations of Version1**
+1) Spaces between the blanks is not visible to indicate how many letters are there in the word.
+2) Double letter enteries were getting accepted without throwing an error.
+
+
+
