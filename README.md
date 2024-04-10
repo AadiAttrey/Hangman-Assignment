@@ -25,5 +25,10 @@ The game will keep track of your guesses and update the hangman image as you pro
 2) Double letter enteries were getting accepted without throwing an error.
 3) Technical errors in code which led to major problems in the game.
 
+**Limitations of Version2**
+1) The Hangman figure is working in the opposite format i.e Hangman figure is getting destroyed with wrong guesses instead of getting created with every wrong guess.
+2) The GUI needs to be improved in the following versions so as to make it look more dynamic and user-friendly.
+3) A Virtual keyboard needs to be integrated so as to define the user inputs and manage wrong inputs.
+
 
 
