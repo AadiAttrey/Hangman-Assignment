@@ -23,6 +23,7 @@ The game will keep track of your guesses and update the hangman image as you pro
 **Limitations of Version1**
 1) Spaces between the blanks is not visible to indicate how many letters are there in the word.
 2) Double letter enteries were getting accepted without throwing an error.
+3) Technical errors in code which led to major problems in the game.
 
 
 
