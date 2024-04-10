@@ -1,0 +1,128 @@
+import tkinter as tk
+from tkinter import messagebox
+import random
+
+class HangmanGUI:
+    def __init__(self, master):
+        self.master = master
+        master.title("Hangman Game")
+
+        self.word = ""
+        self.word_completion = ""
+        self.guessed_letters = []
+        self.tries = 0
+
+        self.level_label = tk.Label(master, text="Choose difficulty level (easy, medium, hard):")
+        self.level_label.pack()
+
+        self.level_entry = tk.Entry(master)
+        self.level_entry.pack()
+
+        self.start_button = tk.Button(master, text="Start Game", command=self.start_game)
+        self.start_button.pack()
+
+        self.keyboard_frame = tk.Frame(master)
+        self.keyboard_frame.pack()
+
+        self.create_keyboard()
+
+        self.output_text = tk.Text(master, height=10, width=50)
+        self.output_text.pack()
+
+    def start_game(self):
+        self.level = self.level_entry.get().lower()
+        self.word = self.get_word(self.level)
+        self.word_completion = " ".join(["_"] * len(self.word))
+        self.tries = 0
+        self.guessed_letters = []
+        self.output_text.delete(1.0, tk.END)
+        self.display_hangman()
+        self.display_word_completion()
+        self.output_text.insert(tk.END, "Let's play Hangman!\n")
+
+    def create_keyboard(self):
+        self.buttons = []
+        for letter in "abcdefghijklmnopqrstuvwxyz":
+            button = tk.Button(self.keyboard_frame, text=letter, command=lambda l=letter: self.guess_letter(l))
+            button.grid(row=(ord(letter) - ord("a")) // 7, column=(ord(letter) - ord("a")) % 7)
+            self.buttons.append(button)
+
+    def guess_letter(self, letter):
+        if letter not in self.guessed_letters:
+            self.guessed_letters.append(letter)
+            if letter not in self.word:
+                self.tries += 1
+                self.display_hangman()
+            self.display_word_completion()
+            self.check_game_status()
+
+    def display_hangman(self):
+        stages = ['''
+    +---+
+    |   |
+        |
+        |
+        |
+       ===''', '''
+    +---+
+    |   |
+    O   |
+        |
+        |
+       ===''', '''
+    +---+
+    |   |
+    O   |
+    |   |
+        |
+       ===''', '''
+    +---+
+    |   |
+    O   |
+   /|   |
+        |
+       ===''', '''
+    +---+
+    |   |
+    O   |
+   /|\\  |
+        |
+       ===''', '''
+    +---+
+    |   |
+    O   |
+   /|\\  |
+   /    |
+       ===''', '''
+    +---+
+    |   |
+    O   |
+   /|\\  |
+   / \\  |
+       ===''']
+        self.output_text.delete(1.0, tk.END)
+        self.output_text.insert(tk.END, stages[self.tries])
+
+    def display_word_completion(self):
+        displayed_word = " ".join([char if char in self.guessed_letters else "_" for char in self.word])
+        self.output_text.insert(tk.END, f"\n\nWord: {displayed_word}\n")
+
+    def check_game_status(self):
+        if "_" not in self.word_completion.replace(" ", ""):
+            messagebox.showinfo("Congratulations!", "You guessed the word!")
+            self.start_button['state'] = tk.NORMAL
+        elif self.tries == 6:
+            messagebox.showinfo("Game Over", f"Sorry, you ran out of tries. The word was {self.word}.")
+            self.start_button['state'] = tk.NORMAL
+
+    def get_word(self, level):
+        if level == 'easy':
+            return random.choice(['dog', 'cat', 'elephant', 'tiger', 'lion'])
+        elif level == 'medium':
+            return random.choice(['apple', 'banana', 'orange', 'grape', 'strawberry'])
+        elif level == 'hard':
+            return random.choice(['usa', 'canada', 'india', 'france', 'germany'])
+
+root = tk.Tk()
+hangman_gui = HangmanGUI(root)
+root.mainloop()
