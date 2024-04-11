@@ -30,5 +30,9 @@ The game will keep track of your guesses and update the hangman image as you pro
 2) The GUI needs to be improved in the following versions so as to make it look more dynamic and user-friendly.
 3) A Virtual keyboard needs to be integrated so as to define the user inputs and manage wrong inputs.
 
+**Limitations of Version3**
+1) Score of each player needs to be displayed along with the time taken by them to guess the right word.
+2) When the correct word is guessed, the game is not ending and it is telling the tries have expired.
+
 
 
