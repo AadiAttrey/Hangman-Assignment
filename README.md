@@ -34,5 +34,7 @@ The game will keep track of your guesses and update the hangman image as you pro
 1) Score of each player needs to be displayed along with the time taken by them to guess the right word.
 2) When the correct word is guessed, the game is not ending and it is telling the tries have expired.
 
+3) hello merge conflict
+
 
 
